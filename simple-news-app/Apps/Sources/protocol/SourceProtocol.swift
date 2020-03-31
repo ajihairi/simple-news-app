@@ -1,5 +1,5 @@
 //
-//  APIEnv.swift
+//  SourceProtocol.swift
 //  simple-news-app
 //
 //  Created by Hamzhya Salsatinnov Hairy on 01/04/20.
@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol SourceProtocol {
+    func getSourcesByCat(cat: String, success: @escaping(sourceModels) -> (), failure: @escaping(String) -> Void)
+}

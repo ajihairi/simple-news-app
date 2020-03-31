@@ -8,6 +8,7 @@
 
 import UIKit
 import ImageIO
+import Kingfisher
 
 extension UIImageView {
     
@@ -21,6 +22,24 @@ extension UIImageView {
         if self.viewWithTag(1) == nil {
             self.addSubview(overlay)
         }
+    }
+    
+    func downloadedFromLink(_ urlString: String, contentMode mode: UIView.ContentMode = .scaleAspectFill) {
+        guard let url = URL(string: urlString) else { return }
+        self.contentMode = mode
+        self.kf.setImage(with: url, options: [
+            .transition(.fade(0.4)),
+            .cacheOriginalImage
+            ])
+        self.animateImageAppearance(0.4, option: UIView.AnimationOptions.curveEaseOut, alpha: 1.0)
+    }
+    
+    //Helper for Image Appear Animation
+    fileprivate func animateImageAppearance(_ duration: Double, option: UIView.AnimationOptions, alpha: CGFloat) {
+        
+        UIView.animate(withDuration: duration, delay: 0, options: option, animations: {
+            self.alpha = alpha
+        }, completion: nil)
     }
 }
 
@@ -216,4 +235,5 @@ extension UIImage {
         
         return animation
     }
+    
 }

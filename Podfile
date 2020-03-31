@@ -6,7 +6,9 @@ target 'simple-news-app' do
   use_frameworks!
   pod 'Alamofire'
   pod 'R.swift'
-
+  pod 'lottie-ios'
+  pod 'Kingfisher'
+  
   # Pods for simple-news-app
 
   target 'simple-news-appTests' do
@@ -15,3 +17,4 @@ target 'simple-news-app' do
   end
 
 end
+

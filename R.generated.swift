@@ -128,20 +128,34 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 8 images.
+  /// This `R.image` struct is generated, and contains static references to 15 images.
   struct image {
     /// Image `Default-568h`.
     static let default568h = Rswift.ImageResource(bundle: R.hostingBundle, name: "Default-568h")
     /// Image `business_img`.
     static let business_img = Rswift.ImageResource(bundle: R.hostingBundle, name: "business_img")
+    /// Image `close`.
+    static let close = Rswift.ImageResource(bundle: R.hostingBundle, name: "close")
+    /// Image `country`.
+    static let country = Rswift.ImageResource(bundle: R.hostingBundle, name: "country")
+    /// Image `delete`.
+    static let delete = Rswift.ImageResource(bundle: R.hostingBundle, name: "delete")
     /// Image `entertainment_img`.
     static let entertainment_img = Rswift.ImageResource(bundle: R.hostingBundle, name: "entertainment_img")
+    /// Image `filter`.
+    static let filter = Rswift.ImageResource(bundle: R.hostingBundle, name: "filter")
     /// Image `health_Img`.
     static let health_Img = Rswift.ImageResource(bundle: R.hostingBundle, name: "health_Img")
+    /// Image `language`.
+    static let language = Rswift.ImageResource(bundle: R.hostingBundle, name: "language")
     /// Image `music_img`.
     static let music_img = Rswift.ImageResource(bundle: R.hostingBundle, name: "music_img")
+    /// Image `placeholder`.
+    static let placeholder = Rswift.ImageResource(bundle: R.hostingBundle, name: "placeholder")
     /// Image `politics_img`.
     static let politics_img = Rswift.ImageResource(bundle: R.hostingBundle, name: "politics_img")
+    /// Image `search`.
+    static let search = Rswift.ImageResource(bundle: R.hostingBundle, name: "search")
     /// Image `sport_img`.
     static let sport_img = Rswift.ImageResource(bundle: R.hostingBundle, name: "sport_img")
     /// Image `tech_img`.
@@ -162,9 +176,37 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "close", bundle: ..., traitCollection: ...)`
+    static func close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.close, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "country", bundle: ..., traitCollection: ...)`
+    static func country(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.country, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "delete", bundle: ..., traitCollection: ...)`
+    static func delete(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.delete, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIImage(named: "entertainment_img", bundle: ..., traitCollection: ...)`
     static func entertainment_img(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.entertainment_img, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "filter", bundle: ..., traitCollection: ...)`
+    static func filter(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.filter, compatibleWith: traitCollection)
     }
     #endif
 
@@ -176,6 +218,13 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "language", bundle: ..., traitCollection: ...)`
+    static func language(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.language, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIImage(named: "music_img", bundle: ..., traitCollection: ...)`
     static func music_img(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.music_img, compatibleWith: traitCollection)
@@ -183,9 +232,23 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "placeholder", bundle: ..., traitCollection: ...)`
+    static func placeholder(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.placeholder, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIImage(named: "politics_img", bundle: ..., traitCollection: ...)`
     static func politics_img(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.politics_img, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "search", bundle: ..., traitCollection: ...)`
+    static func search(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.search, compatibleWith: traitCollection)
     }
     #endif
 
@@ -206,10 +269,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 3 nibs.
   struct nib {
     /// Nib `HomeCell`.
     static let homeCell = _R.nib._HomeCell()
+    /// Nib `SearchTableViewCell`.
+    static let searchTableViewCell = _R.nib._SearchTableViewCell()
+    /// Nib `SourcesTableViewCell`.
+    static let sourcesTableViewCell = _R.nib._SourcesTableViewCell()
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "HomeCell", in: bundle)`
@@ -219,8 +286,32 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SearchTableViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.searchTableViewCell) instead")
+    static func searchTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.searchTableViewCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SourcesTableViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.sourcesTableViewCell) instead")
+    static func sourcesTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.sourcesTableViewCell)
+    }
+    #endif
+
     static func homeCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeCell? {
       return R.nib.homeCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeCell
+    }
+
+    static func searchTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SearchTableViewCell? {
+      return R.nib.searchTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchTableViewCell
+    }
+
+    static func sourcesTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SourcesTableViewCell? {
+      return R.nib.sourcesTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SourcesTableViewCell
     }
 
     fileprivate init() {}
@@ -272,6 +363,28 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
+    struct _SearchTableViewCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "SearchTableViewCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SearchTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchTableViewCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _SourcesTableViewCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "SourcesTableViewCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SourcesTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SourcesTableViewCell
+      }
+
+      fileprivate init() {}
+    }
+
     fileprivate init() {}
   }
   #endif
@@ -308,11 +421,23 @@ struct _R: Rswift.Validatable {
       typealias InitialController = UIKit.UINavigationController
 
       let bundle = R.hostingBundle
+      let homeViewController = StoryboardViewControllerResource<HomeViewController>(identifier: "HomeViewController")
       let name = "Main"
+      let sourcesViewController = StoryboardViewControllerResource<SourcesViewController>(identifier: "SourcesViewController")
+
+      func homeViewController(_: Void = ()) -> HomeViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: homeViewController)
+      }
+
+      func sourcesViewController(_: Void = ()) -> SourcesViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sourcesViewController)
+      }
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.main().homeViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'homeViewController' could not be loaded from storyboard 'Main' as 'HomeViewController'.") }
+        if _R.storyboard.main().sourcesViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sourcesViewController' could not be loaded from storyboard 'Main' as 'SourcesViewController'.") }
       }
 
       fileprivate init() {}

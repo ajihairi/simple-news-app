@@ -55,5 +55,11 @@ class HomeViewController: BaseView, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let views = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SourcesViewController") as! SourcesViewController
+        views.categoryName = self.catList[indexPath.row].cat_name
+        self.navigationController?.pushViewController(views, animated: true)
+    }
+    
 
 }
