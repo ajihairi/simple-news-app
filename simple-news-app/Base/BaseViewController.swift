@@ -290,7 +290,7 @@ extension UIViewController {
     
     
     func showAlert(_ message: String, completion: @escaping() -> Void) {
-        let alertController = UIAlertController(title: "Pasar Udang", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "WARNING!", message: message, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "OK", style: .cancel) { (action:UIAlertAction) in
             completion()

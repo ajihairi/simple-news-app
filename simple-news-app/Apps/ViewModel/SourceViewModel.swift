@@ -12,6 +12,7 @@ class SourceViewModel {
     private let service: SourceProtocol
     
     var sourceList = sourceModels()
+    var articleList = articleModels()
     
     //MARK: -- Network checking
     
@@ -68,6 +69,29 @@ class SourceViewModel {
         return self.sourceList.sorted(by: {$0.name! < $1.name!})
     }
     
+    func filteringArticle() -> articleModels {
+        return self.articleList.sorted(by: {$0.title! < $1.title!})
+    }
+    func getArticleBySource(source: String, completion: @escaping() -> (), failed: @escaping(String) -> ()) {
+        switch networkStatus {
+        case .offline:
+            self.isDisconnected = true
+            self.internetConnectionStatus?()
+        case .online:
+            self.isLoading = true
+            self.service.getArticleBySource(source: source.lowercased(), success: { (articles) in
+                self.articleList = articles
+                self.isLoading = false
+                completion()
+            }) { (error) in
+                self.isLoading = false
+                failed(error)
+                self.alertMessage = error
+            }
+        default:
+            break
+        }
+    }
     func getSourceByCat(cat: String, completion: @escaping() -> (), failed: @escaping(String) -> ()) {
         switch networkStatus {
         case .offline:

@@ -14,7 +14,7 @@ class SourcesViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
     var categoryName = ""
     var sourceList = sourceModels()
     var viewModel = SourceViewModel()
-    var loadingView = UIRefreshControl()
+    var loadingView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,27 +39,27 @@ class SourcesViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
     
     func setupViewModel() {
         self.viewModel.showAlertClosure = { [weak self] in
-                    let alert = self?.viewModel.alertMessage ?? ""
-                    debugPrint(alert)
+            let alert = self?.viewModel.alertMessage ?? ""
+            self?.showAlert(alert, completion: {})
         //            self?.showToast(message: alert, font: .systemFont(ofSize: 12))
-                }
+        }
                 
-                self.viewModel.updateLoadingStatus = { [weak self] in
-                    if self?.viewModel.isLoading ?? true {
-                        self?.loadingView.beginRefreshing()
-                    } else {
-                        self?.loadingView.endRefreshing()
-                    }
-                }
-                self.viewModel.internetConnectionStatus = { [weak self] in
-                    print("Internet disconnected")
-                    self?.tableview.reloadData()
-                }
-                
-                self.viewModel.serverErrorStatus = {
-                    print("Server Error / Unknown Error")
-                    // show UI Server is Error
-                }
+        self.viewModel.updateLoadingStatus = { [weak self] in
+            if self?.viewModel.isLoading ?? true {
+                self?.loadingView.startAnimating()
+            } else {
+                self?.loadingView.stopAnimating()
+            }
+        }
+        self.viewModel.internetConnectionStatus = { [weak self] in
+            print("Internet disconnected")
+            self?.tableview.reloadData()
+        }
+        
+        self.viewModel.serverErrorStatus = {
+            print("Server Error / Unknown Error")
+            // show UI Server is Error
+        }
         self.viewModel.getSourceByCat(cat: self.categoryName.lowercased(), completion: {
             self.sourceList = self.viewModel.sourceList
             print(self.sourceList)
@@ -92,6 +92,13 @@ class SourcesViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
             cell.setupView(data: self.sourceList[indexPath.row])
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let views = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ArticleViewController") as! ArticleViewController
+        views.sourceName = self.sourceList[indexPath.row].name ?? ""
+        views.sourceId = self.sourceList[indexPath.row].id ?? ""
+        self.navigationController?.pushViewController(views, animated: true)
     }
     
     // MARK: -- SEARCH DELEGATE

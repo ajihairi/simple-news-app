@@ -10,6 +10,25 @@ import Foundation
 import Alamofire
 
 struct SourceServices: SourceProtocol {
+    
+    func getArticleBySource(source: String, success: @escaping (articleModels) -> (), failure: @escaping (String) -> Void) {
+        let params: [String:Any] = [
+            "sources" : source,
+            "language" : "en"
+        ]
+        APIManager.request(typeNews().topHeadlines, method: .get, parameters: params, encoding: URLEncoding.default, headers: APIManager.getHeaders(), completion: { (data) in
+            do {
+                let decoded = try JSONDecoder().decode(ArticleEncoding.self, from: data)
+                let successdata = decoded.articles!
+                success(successdata)
+            } catch {
+                failure(APIManager.generateRandomError())
+            }
+        }) { (error, code) in
+            failure("\(error) \(code)")
+        }
+    }
+    
     func getSourcesByCat(cat: String, success: @escaping (sourceModels) -> (), failure: @escaping (String) -> Void) {
         let params: [String:Any] = [
             "country" : "us",

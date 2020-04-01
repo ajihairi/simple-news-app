@@ -14,6 +14,7 @@ class HomeCell: UITableViewCell {
     @IBOutlet weak var catImage: GSImageView!
     @IBOutlet weak var overlayView: GSView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var publisher: UILabel!
     
     
     override func awakeFromNib() {
@@ -25,6 +26,20 @@ class HomeCell: UITableViewCell {
         self.selectionStyle = .none
         self.catImage.image = data.cat_Img ?? UIImage()
         self.titleLabel.text = data.cat_name
+        self.publisher.isHidden = true
+    }
+    func setupArticles(Article data: ArticleModel) {
+        self.selectionStyle = .none
+        self.catImage.downloadedFromLink(data.urlToImage ?? "", contentMode: .scaleAspectFill)
+        self.titleLabel.text = data.title ?? ""
+        self.publisher.isHidden = false
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from:data.publishedAt ?? "2016-04-14T10:44:00+0000") ?? Date()
+        
+        self.publisher.text = "\(data.author ?? "") \n \(date.toString(dateFormat: "dd' 'MMM' 'yyyy' at 'hh':'mm")) "
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

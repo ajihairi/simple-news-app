@@ -10,4 +10,5 @@ import Foundation
 
 protocol SourceProtocol {
     func getSourcesByCat(cat: String, success: @escaping(sourceModels) -> (), failure: @escaping(String) -> Void)
+    func getArticleBySource(source: String, success: @escaping(articleModels) -> (), failure: @escaping(String) -> Void)
 }

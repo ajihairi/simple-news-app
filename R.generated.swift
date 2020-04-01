@@ -269,14 +269,24 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 3 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 4 nibs.
   struct nib {
+    /// Nib `ArticleDetailCell`.
+    static let articleDetailCell = _R.nib._ArticleDetailCell()
     /// Nib `HomeCell`.
     static let homeCell = _R.nib._HomeCell()
     /// Nib `SearchTableViewCell`.
     static let searchTableViewCell = _R.nib._SearchTableViewCell()
     /// Nib `SourcesTableViewCell`.
     static let sourcesTableViewCell = _R.nib._SourcesTableViewCell()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "ArticleDetailCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.articleDetailCell) instead")
+    static func articleDetailCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.articleDetailCell)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "HomeCell", in: bundle)`
@@ -301,6 +311,10 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.sourcesTableViewCell)
     }
     #endif
+
+    static func articleDetailCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> ArticleDetailCell? {
+      return R.nib.articleDetailCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? ArticleDetailCell
+    }
 
     static func homeCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeCell? {
       return R.nib.homeCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeCell
@@ -344,6 +358,17 @@ struct _R: Rswift.Validatable {
   struct nib: Rswift.Validatable {
     static func validate() throws {
       try _HomeCell.validate()
+    }
+
+    struct _ArticleDetailCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "ArticleDetailCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> ArticleDetailCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? ArticleDetailCell
+      }
+
+      fileprivate init() {}
     }
 
     struct _HomeCell: Rswift.NibResourceType, Rswift.Validatable {
@@ -420,10 +445,20 @@ struct _R: Rswift.Validatable {
     struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = UIKit.UINavigationController
 
+      let articleViewController = StoryboardViewControllerResource<ArticleViewController>(identifier: "ArticleViewController")
       let bundle = R.hostingBundle
+      let detailViewController = StoryboardViewControllerResource<DetailViewController>(identifier: "DetailViewController")
       let homeViewController = StoryboardViewControllerResource<HomeViewController>(identifier: "HomeViewController")
       let name = "Main"
       let sourcesViewController = StoryboardViewControllerResource<SourcesViewController>(identifier: "SourcesViewController")
+
+      func articleViewController(_: Void = ()) -> ArticleViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: articleViewController)
+      }
+
+      func detailViewController(_: Void = ()) -> DetailViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: detailViewController)
+      }
 
       func homeViewController(_: Void = ()) -> HomeViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: homeViewController)
@@ -436,6 +471,8 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.main().articleViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'articleViewController' could not be loaded from storyboard 'Main' as 'ArticleViewController'.") }
+        if _R.storyboard.main().detailViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'detailViewController' could not be loaded from storyboard 'Main' as 'DetailViewController'.") }
         if _R.storyboard.main().homeViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'homeViewController' could not be loaded from storyboard 'Main' as 'HomeViewController'.") }
         if _R.storyboard.main().sourcesViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sourcesViewController' could not be loaded from storyboard 'Main' as 'SourcesViewController'.") }
       }

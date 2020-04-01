@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AxY-QF-3a4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -69,6 +68,126 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5S-Lo-QSt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1334" y="122"/>
+        </scene>
+        <!--Article View Controller-->
+        <scene sceneID="OzS-DX-MIx">
+            <objects>
+                <viewController storyboardIdentifier="ArticleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iTs-lJ-rZ6" customClass="ArticleViewController" customModule="simple_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v2H-dp-6GB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pkb-CV-ycF">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="pkb-CV-ycF" firstAttribute="leading" secondItem="C7R-tj-2KN" secondAttribute="leading" id="1gt-XU-FQC"/>
+                            <constraint firstItem="C7R-tj-2KN" firstAttribute="trailing" secondItem="pkb-CV-ycF" secondAttribute="trailing" id="egu-qd-Fus"/>
+                            <constraint firstItem="pkb-CV-ycF" firstAttribute="top" secondItem="C7R-tj-2KN" secondAttribute="top" id="ual-Az-qbz"/>
+                            <constraint firstAttribute="bottom" secondItem="pkb-CV-ycF" secondAttribute="bottom" id="yaI-Nm-uWh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C7R-tj-2KN"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableview" destination="pkb-CV-ycF" id="XJt-cf-Ysd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dmd-43-PF9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2153" y="103"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="OsD-2n-ONU">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ojh-do-KDF" customClass="DetailViewController" customModule="simple_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="liq-VJ-ncc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UDt-U3-nfr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="732"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djv-LX-Jsv" customClass="GSView" customModule="simple_news_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="776" width="414" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5E-lS-qBk" customClass="BXButton" customModule="simple_news_app" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="15" width="384" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="ywv-0c-tTl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Read Full Article">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.0" alpha="0.18065030809999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="readFullAction:" destination="Ojh-do-KDF" eventType="touchUpInside" id="Ef4-ou-WQ7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="g5E-lS-qBk" secondAttribute="trailing" constant="15" id="4gs-Sj-gcW"/>
+                                    <constraint firstAttribute="height" constant="120" id="Aza-e5-KWe"/>
+                                    <constraint firstItem="g5E-lS-qBk" firstAttribute="leading" secondItem="djv-LX-Jsv" secondAttribute="leading" constant="15" id="T54-OD-Jpp"/>
+                                    <constraint firstItem="g5E-lS-qBk" firstAttribute="top" secondItem="djv-LX-Jsv" secondAttribute="top" constant="15" id="Wsl-wq-H5D"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="djv-LX-Jsv" firstAttribute="leading" secondItem="dQj-Yt-tV2" secondAttribute="leading" id="DeU-gQ-AgP"/>
+                            <constraint firstItem="UDt-U3-nfr" firstAttribute="leading" secondItem="dQj-Yt-tV2" secondAttribute="leading" id="UxY-OJ-Ttf"/>
+                            <constraint firstItem="dQj-Yt-tV2" firstAttribute="trailing" secondItem="UDt-U3-nfr" secondAttribute="trailing" id="aKy-Os-kaq"/>
+                            <constraint firstAttribute="bottom" secondItem="djv-LX-Jsv" secondAttribute="bottom" id="fy5-FC-LYu"/>
+                            <constraint firstItem="UDt-U3-nfr" firstAttribute="top" secondItem="dQj-Yt-tV2" secondAttribute="top" id="gbi-v3-hy6"/>
+                            <constraint firstItem="djv-LX-Jsv" firstAttribute="top" secondItem="UDt-U3-nfr" secondAttribute="bottom" id="nYv-rx-5YF"/>
+                            <constraint firstItem="djv-LX-Jsv" firstAttribute="trailing" secondItem="dQj-Yt-tV2" secondAttribute="trailing" id="uZo-JW-G8C"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dQj-Yt-tV2"/>
+                    </view>
+                    <connections>
+                        <outlet property="readFullBtn" destination="g5E-lS-qBk" id="5bv-Jo-Nsv"/>
+                        <outlet property="tableview" destination="UDt-U3-nfr" id="ECK-e1-wMq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jBt-OU-XSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2984.057971014493" y="104.46428571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EUg-yS-GOL">

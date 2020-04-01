@@ -8,6 +8,7 @@ target 'simple-news-app' do
   pod 'R.swift'
   pod 'lottie-ios'
   pod 'Kingfisher'
+
   
   # Pods for simple-news-app
 
