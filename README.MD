@@ -1,7 +1,14 @@
 
-simple app for news
+# Simple Apps for news Fetching
 
+**How to run this project**
 1. clone the project
-2. install pod
-3. open projectname.xcworkspace
-4. run
+2. install pod `pod install`
+3. open *projectName*.xcworkspace
+4. run the project
+
+**Details**
+- MVVM Pattern
+-  using *cocoaponds*
+-  library used (Alamofire, R.swift, kingfisher)
+
