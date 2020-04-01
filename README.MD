@@ -9,6 +9,5 @@
 
 **Details**
 - MVVM Pattern
--  using *cocoaponds*
 -  library used (Alamofire, R.swift, kingfisher)
 
