@@ -72,6 +72,27 @@ class SourceViewModel {
     func filteringArticle() -> articleModels {
         return self.articleList.sorted(by: {$0.title! < $1.title!})
     }
+    
+    func getArticleSearch(q: String, completion: @escaping() -> (), failed: @escaping(String) -> ()) {
+        switch networkStatus {
+        case .offline:
+            self.isDisconnected = true
+            self.internetConnectionStatus?()
+        case .online:
+            self.isLoading = true
+            self.service.getArticleBySearch(query: q.lowercased(), success: { (article) in
+                self.articleList = article
+                self.isLoading = false
+                completion()
+            }) { (error) in
+                self.isLoading = false
+                failed(error)
+                self.alertMessage = error
+            }
+        default:
+            break
+        }
+    }
     func getArticleBySource(source: String, completion: @escaping() -> (), failed: @escaping(String) -> ()) {
         switch networkStatus {
         case .offline:

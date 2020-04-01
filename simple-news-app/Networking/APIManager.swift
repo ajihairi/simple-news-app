@@ -132,4 +132,5 @@ struct APIManager {
 struct typeNews {
     var sources = "sources"
     var topHeadlines = "top-headlines"
+    var everything = "everything"
 }

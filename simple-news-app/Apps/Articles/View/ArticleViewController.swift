@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum isShortCut {
+    case `true`
+    case `false`
+}
+
 class ArticleViewController: BaseView, UITableViewDelegate, UITableViewDataSource, SearchViewProtocol {
 
     @IBOutlet weak var tableview: UITableView!
@@ -16,7 +21,7 @@ class ArticleViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
     var articleList = articleModels()
     var sourceName = ""
     var sourceId = ""
-    var loadingView = UIActivityIndicatorView()
+    var shortCut = isShortCut.false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,37 +39,48 @@ class ArticleViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        let withSubtitle = self.setTitleBarWithColor(title: self.sourceName.uppercased(), titleColor: .black, subtitle: "Articles ", subtitleColor: .systemGray3)
-            self.navigationItem.titleView = withSubtitle
-            self.navigationItem.largeTitleDisplayMode = .automatic
-            self.navigationController?.navigationBar.dropShadow()
-            self.navigationController?.navigationBar.backgroundColor = .white
-            setupViewModel()
+        self.setupNavBar(title: nil, sub: nil)
+        setupViewModel()
         }
         
-        func setupViewModel() {
-            self.viewModel.showAlertClosure = { [weak self] in
-                let alert = self?.viewModel.alertMessage ?? ""
-                self?.showAlert(alert, completion: {})
-            //            self?.showToast(message: alert, font: .systemFont(ofSize: 12))
+    func setupNavBar(title: String?, sub: String?) {
+        let withSubtitle = self.setTitleBarWithColor(title: title ?? self.sourceName.uppercased(), titleColor: .black, subtitle: sub ?? "Articles", subtitleColor: .darkGray)
+        self.navigationItem.titleView = withSubtitle
+        self.navigationItem.largeTitleDisplayMode = .automatic
+        self.navigationController?.navigationBar.dropShadow()
+        self.navigationController?.navigationBar.backgroundColor = .white
+    }
+    func setupViewModel() {
+        self.viewModel.showAlertClosure = { [weak self] in
+            let alert = self?.viewModel.alertMessage ?? ""
+            self?.showAlert(alert, completion: {})
+        }
+                
+        self.viewModel.updateLoadingStatus = { [weak self] in
+            if self?.viewModel.isLoading ?? true {
+                self?.showSpinner(onView: self!.view)
+            } else {
+                self?.removeSpinner()
             }
-                    
-            self.viewModel.updateLoadingStatus = { [weak self] in
-                if self?.viewModel.isLoading ?? true {
-                    self?.loadingView.startAnimating()
-                } else {
-                    self?.loadingView.startAnimating()
-                }
+        }
+        self.viewModel.internetConnectionStatus = { [weak self] in
+            print("Internet disconnected")
+            self?.tableview.reloadData()
+        }
+        
+        self.viewModel.serverErrorStatus = {
+            print("Server Error / Unknown Error")
+            // show UI Server is Error
+        }
+        if shortCut == .true {
+            self.viewModel.getArticleSearch(q: self.sourceName, completion: {
+                self.articleList = self.viewModel.articleList
+                self.tableview.reloadData()
+                self.setupNavBar(title: self.sourceName, sub: "Search Result for : \(self.sourceName)")
+            }) { (err) in
+                print(err)
             }
-            self.viewModel.internetConnectionStatus = { [weak self] in
-                print("Internet disconnected")
-                self?.tableview.reloadData()
-            }
-            
-            self.viewModel.serverErrorStatus = {
-                print("Server Error / Unknown Error")
-                // show UI Server is Error
-            }
+        } else {
             self.viewModel.getArticleBySource(source: self.sourceId.lowercased(), completion: {
                 self.articleList = self.viewModel.articleList
                 self.tableview.reloadData()
@@ -72,6 +88,8 @@ class ArticleViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
                 print(err)
             }
         }
+            
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,18 +125,14 @@ class ArticleViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
     }
     
     func didSearchEnd(_ key: String) {
-        if key == "" {
-            self.view.endEditing(true)
+        self.sourceName = key
+        self.setupNavBar(title: self.sourceName, sub: "Search Result for : \(self.sourceName)")
+        self.viewModel.getArticleSearch(q: key, completion: {
             self.articleList = self.viewModel.articleList
             self.tableview.reloadData()
-        } else {
-            self.articleList = self.articleList.filter { item -> Bool in
-                return item.title?.lowercased().range(of: key.lowercased()) != nil
-            }
-            self.tableview.reloadData()
+        }) { (err) in
+            print(err)
         }
     }
-    
-    
 
 }

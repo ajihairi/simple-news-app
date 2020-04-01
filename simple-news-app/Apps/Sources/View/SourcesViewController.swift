@@ -14,7 +14,7 @@ class SourcesViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
     var categoryName = ""
     var sourceList = sourceModels()
     var viewModel = SourceViewModel()
-    var loadingView = UIActivityIndicatorView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class SourcesViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        let withSubtitle = self.setTitleBarWithColor(title: "NEWS SOURCES", titleColor: .black, subtitle: self.categoryName, subtitleColor: .systemGray3)
+        let withSubtitle = self.setTitleBarWithColor(title: "NEWS SOURCES", titleColor: .black, subtitle: self.categoryName, subtitleColor: .darkGray)
         self.navigationItem.titleView = withSubtitle
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.navigationController?.navigationBar.dropShadow()
@@ -46,9 +46,9 @@ class SourcesViewController: BaseView, UITableViewDelegate, UITableViewDataSourc
                 
         self.viewModel.updateLoadingStatus = { [weak self] in
             if self?.viewModel.isLoading ?? true {
-                self?.loadingView.startAnimating()
+                self?.showSpinner(onView: self!.view)
             } else {
-                self?.loadingView.stopAnimating()
+                self?.removeSpinner()
             }
         }
         self.viewModel.internetConnectionStatus = { [weak self] in

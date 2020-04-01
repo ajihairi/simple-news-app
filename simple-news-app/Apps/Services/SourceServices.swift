@@ -11,6 +11,27 @@ import Alamofire
 
 struct SourceServices: SourceProtocol {
     
+    func getArticleBySearch(query: String, success: @escaping (articleModels) -> (), failure: @escaping (String) -> Void) {
+        let params: [String:Any] = [
+            "q" : query,
+            "sortBy" : "popularity",
+            "language" : "en"
+        ]
+        APIManager.request(typeNews().everything, method: .get, parameters: params, encoding: URLEncoding.default, headers: APIManager.getHeaders(), completion: { (data) in
+            do {
+                let decoded = try JSONDecoder().decode(ArticleEncoding.self, from: data)
+                let successdata = decoded.articles!
+                success(successdata)
+                
+            } catch {
+                failure(APIManager.generateRandomError())
+            }
+        }) { (error, code) in
+                failure("\(error) \(code)")
+        }
+    }
+    
+    
     func getArticleBySource(source: String, success: @escaping (articleModels) -> (), failure: @escaping (String) -> Void) {
         let params: [String:Any] = [
             "sources" : source,
